@@ -70,10 +70,16 @@
             this.label14 = new System.Windows.Forms.Label();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.label17 = new System.Windows.Forms.Label();
-            this.textBox12 = new System.Windows.Forms.TextBox();
             this.textBox13 = new System.Windows.Forms.TextBox();
+            this.textBox12 = new System.Windows.Forms.TextBox();
             this.button4 = new System.Windows.Forms.Button();
             this.label18 = new System.Windows.Forms.Label();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.textBox11 = new System.Windows.Forms.TextBox();
+            this.textBox10 = new System.Windows.Forms.TextBox();
+            this.button5 = new System.Windows.Forms.Button();
+            this.label16 = new System.Windows.Forms.Label();
             this.pnlData.SuspendLayout();
             this.grpConfig.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -82,10 +88,12 @@
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox5.SuspendLayout();
+            this.groupBox6.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlData
             // 
+            this.pnlData.Controls.Add(this.groupBox6);
             this.pnlData.Controls.Add(this.groupBox5);
             this.pnlData.Controls.Add(this.groupBox4);
             this.pnlData.Controls.Add(this.groupBox3);
@@ -475,8 +483,8 @@
             // groupBox5
             // 
             this.groupBox5.Controls.Add(this.label17);
-            this.groupBox5.Controls.Add(this.textBox12);
             this.groupBox5.Controls.Add(this.textBox13);
+            this.groupBox5.Controls.Add(this.textBox12);
             this.groupBox5.Controls.Add(this.button4);
             this.groupBox5.Controls.Add(this.label18);
             this.groupBox5.Location = new System.Drawing.Point(16, 545);
@@ -495,21 +503,21 @@
             this.label17.TabIndex = 7;
             this.label17.Text = "l2";
             // 
-            // textBox12
-            // 
-            this.textBox12.Location = new System.Drawing.Point(60, 53);
-            this.textBox12.Name = "textBox12";
-            this.textBox12.Size = new System.Drawing.Size(184, 20);
-            this.textBox12.TabIndex = 1;
-            this.textBox12.Text = "20;25";
-            // 
             // textBox13
             // 
-            this.textBox13.Location = new System.Drawing.Point(60, 27);
+            this.textBox13.Location = new System.Drawing.Point(60, 53);
             this.textBox13.Name = "textBox13";
             this.textBox13.Size = new System.Drawing.Size(184, 20);
-            this.textBox13.TabIndex = 0;
-            this.textBox13.Text = "10;5";
+            this.textBox13.TabIndex = 1;
+            this.textBox13.Text = "800;-50;2";
+            // 
+            // textBox12
+            // 
+            this.textBox12.Location = new System.Drawing.Point(60, 27);
+            this.textBox12.Name = "textBox12";
+            this.textBox12.Size = new System.Drawing.Size(184, 20);
+            this.textBox12.TabIndex = 0;
+            this.textBox12.Text = "100;-50;2";
             // 
             // button4
             // 
@@ -519,6 +527,7 @@
             this.button4.TabIndex = 3;
             this.button4.Text = "Paint";
             this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // label18
             // 
@@ -528,6 +537,64 @@
             this.label18.Size = new System.Drawing.Size(15, 13);
             this.label18.TabIndex = 5;
             this.label18.Text = "l1";
+            // 
+            // groupBox6
+            // 
+            this.groupBox6.Controls.Add(this.label15);
+            this.groupBox6.Controls.Add(this.textBox11);
+            this.groupBox6.Controls.Add(this.textBox10);
+            this.groupBox6.Controls.Add(this.button5);
+            this.groupBox6.Controls.Add(this.label16);
+            this.groupBox6.Location = new System.Drawing.Point(16, 630);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.Size = new System.Drawing.Size(428, 79);
+            this.groupBox6.TabIndex = 14;
+            this.groupBox6.TabStop = false;
+            this.groupBox6.Text = "AngleBetweenVector";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(20, 56);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(43, 13);
+            this.label15.TabIndex = 7;
+            this.label15.Text = "vector2";
+            // 
+            // textBox11
+            // 
+            this.textBox11.Location = new System.Drawing.Point(69, 53);
+            this.textBox11.Name = "textBox11";
+            this.textBox11.Size = new System.Drawing.Size(184, 20);
+            this.textBox11.TabIndex = 1;
+            this.textBox11.Text = "450;350";
+            // 
+            // textBox10
+            // 
+            this.textBox10.Location = new System.Drawing.Point(69, 27);
+            this.textBox10.Name = "textBox10";
+            this.textBox10.Size = new System.Drawing.Size(184, 20);
+            this.textBox10.TabIndex = 0;
+            this.textBox10.Text = "950;750";
+            // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(295, 20);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(75, 23);
+            this.button5.TabIndex = 3;
+            this.button5.Text = "Paint";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(20, 30);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(43, 13);
+            this.label16.TabIndex = 5;
+            this.label16.Text = "vector1";
             // 
             // TfmPaintStudy
             // 
@@ -553,6 +620,8 @@
             this.groupBox4.PerformLayout();
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
+            this.groupBox6.ResumeLayout(false);
+            this.groupBox6.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -601,10 +670,16 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.TextBox textBox12;
         private System.Windows.Forms.TextBox textBox13;
+        private System.Windows.Forms.TextBox textBox12;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.GroupBox groupBox6;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.TextBox textBox11;
+        private System.Windows.Forms.TextBox textBox10;
+        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Label label16;
     }
 }
 

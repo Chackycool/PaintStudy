@@ -308,6 +308,36 @@ namespace PaintStudy
         }
 
         #region 
+        private void PaintVector(Vector2 start, Vector2 end, Color color)
+        {
+            // Малюємо основну лінію вектора
+            Pen pen = new Pen(color, 2); // Ширина лінії вектора - 2 пікселі
+            g.DrawLine(pen, start.X, start.Y, end.X, end.Y);
+
+            // Додаємо стрілку на кінці вектора
+            DrawArrow(pen, start, end);
+        }
+
+
+        private void DrawArrow(Pen pen, Vector2 start, Vector2 end)
+        {
+            // Обчислюємо напрямок вектора (кут)
+            float arrowSize = 10; // Розмір стрілки
+            double angle = Math.Atan2(end.Y - start.Y, end.X - start.X); // Кут нахилу
+
+            // Малюємо стрілки, які виходять із кінцевої точки вектора
+            PointF arrowPoint1 = new PointF(
+                end.X - arrowSize * (float)Math.Cos(angle - Math.PI / 6),
+                end.Y - arrowSize * (float)Math.Sin(angle - Math.PI / 6));
+
+            PointF arrowPoint2 = new PointF(
+                end.X - arrowSize * (float)Math.Cos(angle + Math.PI / 6),
+                end.Y - arrowSize * (float)Math.Sin(angle + Math.PI / 6));
+
+            g.DrawLine(pen, end.X, end.Y, arrowPoint1.X, arrowPoint1.Y);
+            g.DrawLine(pen, end.X, end.Y, arrowPoint2.X, arrowPoint2.Y);
+        }
+
         private float CalcLineY(LineDef l, float x)
         {
             float y = -(l.A * x + l.C) / l.B;
@@ -422,6 +452,154 @@ namespace PaintStudy
 
                 //PaintLine(pres, Color.Red);
 
+                // Вивод результату
+                // PaintLine( pres, DashStyle.DashDotDot, Color.Tomato);
+                // PaintPoint(p3, PointSize, Brushes.Orange);
+                // PaintPoint(pres, PointSize, Brushes.Red);
+
+                //  DrawText("P_inst(xi;yi)", new Font("Tahoma", 1.5f * PointSize), p3);
+                //   DrawText("Pres(x;y)", new Font("Tahoma", 1.5f * PointSize), pres);
+            }
+            finally
+            {
+                // Знищуємо об'єкт графіки та передаємо малюнок Пайнт боксу
+                g.Dispose();
+            }
+            pbPaint.Image = bmp;
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            // Створюємо малюнок та об'єкт графіки для малювання
+            Bitmap bmp = new Bitmap(pbPaint.Width, pbPaint.Height);
+            g = Graphics.FromImage(bmp);
+            try
+            {
+                // Заповнюємо фоном
+                g.Clear(Color.LightYellow);
+                // Змінюємо напрямок по Y
+                g.ScaleTransform(1, -1);
+                // Зміщуємо систему координат на вектор(100;100)
+                g.TranslateTransform(100, 100 - 1 * pbPaint.Height);
+
+                // Блок налаштувань
+                PointSize = Convert.ToInt32(txtPointSize.Text);
+
+                // Отримуємо дані
+                string[] SplitLineFromString = textBox12.Text.Split(';');
+                string[] SplitLineFromString2 = textBox13.Text.Split(';');
+                float A = Convert.ToSingle(SplitLineFromString[0]);
+                float B = Convert.ToSingle(SplitLineFromString[1]);
+                float C = Convert.ToSingle(SplitLineFromString[2]);
+                float A1 = Convert.ToSingle(SplitLineFromString2[0]);
+                float B1 = Convert.ToSingle(SplitLineFromString2[1]);
+                float C1 = Convert.ToSingle(SplitLineFromString2[2]);
+              
+                LineDef line = new LineDef(Convert.ToSingle(SplitLineFromString[0]), Convert.ToSingle(SplitLineFromString[1]), Convert.ToSingle(SplitLineFromString[2]));
+                LineDef line2 = new LineDef(Convert.ToSingle(SplitLineFromString2[0]), Convert.ToSingle(SplitLineFromString2[1]), Convert.ToSingle(SplitLineFromString2[2]));
+
+
+
+                // Малюємо координатні осі
+                g.DrawLine(new Pen(Color.Green), new PointF(-100, 0), new PointF(pbPaint.Width, 0));
+                g.DrawLine(new Pen(Color.Blue), new PointF(0, -100), new PointF(0, pbPaint.Height));
+                DrawText("X", new Font("Tahoma", 2f * PointSize, FontStyle.Bold), Brushes.Green, new PointF(pbPaint.Width - 100 - 3f * PointSize, 0.5f * PointSize));
+                DrawText("Y", new Font("Tahoma", 2f * PointSize, FontStyle.Bold), Brushes.Blue, new PointF(PointSize / 2, pbPaint.Height - 100 - PointSize));
+
+                // Перша пряма
+                LineDef l1 = new LineDef(A, B, C);
+                LineDef l2 = new LineDef(A1, B1, C1);
+                PaintLine(l1, Color.Fuchsia);
+                PaintLine(l2, Color.Blue);
+                //DrawText("P1(x1;y1)", new Font("Tahoma", 1.5f * PointSize), p1);
+
+                //Малюємо вектор
+
+                // Обраховуємо досліджуєму функцію
+                 double s = bePaint.geometry.AngleBetweenLine(l1, l2);
+
+                // Вивод результату
+             
+                // Обраховуємо досліджуєму функцію
+
+                //  LineDef pres = bePaint.geometry.ShiftLine(line, vector);
+
+                // PaintLine(pres, Color.Red);
+                // Вивод результату
+                // PaintLine( pres, DashStyle.DashDotDot, Color.Tomato);
+                // PaintPoint(p3, PointSize, Brushes.Orange);
+                // PaintPoint(pres, PointSize, Brushes.Red);
+
+                //  DrawText("P_inst(xi;yi)", new Font("Tahoma", 1.5f * PointSize), p3);
+                //   DrawText("Pres(x;y)", new Font("Tahoma", 1.5f * PointSize), pres);
+            }
+            finally
+            {
+                // Знищуємо об'єкт графіки та передаємо малюнок Пайнт боксу
+                g.Dispose();
+            }
+            pbPaint.Image = bmp;
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            // Створюємо малюнок та об'єкт графіки для малювання
+            Bitmap bmp = new Bitmap(pbPaint.Width, pbPaint.Height);
+            g = Graphics.FromImage(bmp);
+            try
+            {
+                // Заповнюємо фоном
+                g.Clear(Color.LightYellow);
+                // Змінюємо напрямок по Y
+                g.ScaleTransform(1, -1);
+                // Зміщуємо систему координат на вектор(100;100)
+                g.TranslateTransform(100, 100 - 1 * pbPaint.Height);
+
+                // Блок налаштувань
+                PointSize = Convert.ToInt32(txtPointSize.Text);
+
+                // Отримуємо дані
+
+                string[]arrayvector1 = textBox10.Text.Split(';');
+                string[] arrayvector2 = textBox11.Text.Split(';');
+                Vector2 vector= new Vector2(Convert.ToSingle(arrayvector1[0]), Convert.ToSingle(arrayvector1[1]));
+                Vector2 vector1 = new Vector2(Convert.ToSingle(arrayvector2[0]), Convert.ToSingle(arrayvector2[1]));
+
+
+
+
+                // Малюємо координатні осі
+                g.DrawLine(new Pen(Color.Green), new PointF(-100, 0), new PointF(pbPaint.Width, 0));
+                g.DrawLine(new Pen(Color.Blue), new PointF(0, -100), new PointF(0, pbPaint.Height));
+                DrawText("X", new Font("Tahoma", 2f * PointSize, FontStyle.Bold), Brushes.Green, new PointF(pbPaint.Width - 100 - 3f * PointSize, 0.5f * PointSize));
+                DrawText("Y", new Font("Tahoma", 2f * PointSize, FontStyle.Bold), Brushes.Blue, new PointF(PointSize / 2, pbPaint.Height - 100 - PointSize));
+
+
+                // Перша пряма
+                Vector2 start = new Vector2(0, 0); // Початок вектора в центрі координат
+                Vector2 end = new Vector2(Convert.ToSingle(arrayvector1[0]), Convert.ToSingle(arrayvector1[1]));
+                // Малюємо перший вектор
+                PaintVector(start, end, Color.Red);
+                // Тепер малюємо другий вектор
+
+                Vector2 secondEnd = new Vector2(Convert.ToSingle(arrayvector2[0]), Convert.ToSingle(arrayvector2[1]));
+                PaintVector(start, secondEnd, Color.Blue);
+
+             
+                //DrawText("P1(x1;y1)", new Font("Tahoma", 1.5f * PointSize), p1);
+
+                //Малюємо вектор
+
+                // Обраховуємо досліджуєму функцію
+                double s = bePaint.geometry.AngleBetweenVector(start, end, true);
+
+                // Вивод результату
+
+                // Обраховуємо досліджуєму функцію
+
+                //  LineDef pres = bePaint.geometry.ShiftLine(line, vector);
+
+                // PaintLine(pres, Color.Red);
                 // Вивод результату
                 // PaintLine( pres, DashStyle.DashDotDot, Color.Tomato);
                 // PaintPoint(p3, PointSize, Brushes.Orange);
