@@ -231,7 +231,7 @@ namespace PaintStudy
             }
             pbPaint.Image = bmp;
         }
-
+        
         private void button2_Click(object sender, EventArgs e)
         {
             // Створюємо малюнок та об'єкт графіки для малювання
